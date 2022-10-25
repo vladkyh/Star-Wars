@@ -1,0 +1,15 @@
+.wrapper{
+    margin-top: 45px;
+}
+.person__name{
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    background-color: var(--color-violet);
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    border-left: 5px solid var(--color-violet);
+}

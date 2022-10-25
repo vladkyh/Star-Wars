@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper{
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 0;
+}
+@media screen and (max-width:1400px) {
+  .wrapper{
+    padding: 30px 30px;
+  }
+}

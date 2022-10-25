@@ -1,0 +1,42 @@
+img{
+    display: block;
+}
+:root{
+    --font-size-header: 26px;
+    --transition: .4s;
+    /* дефолт тема */
+    --theme-default-header: #cccc46;
+    --theme-default-bg: url(@static/bg.jpg);
+
+
+    --text-shadow-yellow:
+        0 0 2px white,
+        0 0 40px #cccc46;
+        --text-shadow-blue:
+        0 0 2px white,
+        0 0 40px #6a83fb;
+
+    --color-violet: #ae72c2;
+
+    
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+    font-size: 16px;
+    background-image: url(../static/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-attachment: fixed;
+
+}
+.header__text{
+    line-height: 1.8;
+    font-size:var(--font-size-header) ;
+    text-shadow: 0 0 2px black;
+    color: var(--theme-default-header);
+    transition: color var(--transition);
+}
