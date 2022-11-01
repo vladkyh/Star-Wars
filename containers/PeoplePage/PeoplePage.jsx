@@ -22,7 +22,7 @@ const PeoplePage = ({setErrorApi}) => {
 // тут начинаем переходить по страницам
   const query = useQueryParams();
   const queryPage = query.get('page');
-  console.log(queryPage, NextPage);
+ 
   
 
 
@@ -30,29 +30,22 @@ const PeoplePage = ({setErrorApi}) => {
     // асинхронно принимаем данные
     const res = await getApiResourse(url);
     // с помощью map перебираем массив и выводим имя с url
-    if (res) {
       const peopleList = res.results.map(({name, url}) =>{
         const id =  getPeopleId(url);
-        
         const img = getPeopleImage(id);
-        
         return{
           // если ключ и значение совпадают, то можно писать просто названия
           id,
           name,
           img
         }
-        
       })
+
       setPeople(peopleList);
-      setErrorApi(false);
       setPrevPage(changeHTTP(res.previous));
       setNextPage(changeHTTP(res.next));
       setCounterPage(getPeoplePageId(url));
-    } else{
-      setErrorApi(true)
-    }
-
+      setErrorApi(!res);
    
   }
 

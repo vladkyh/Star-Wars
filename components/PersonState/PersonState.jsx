@@ -1,19 +1,20 @@
 import PropTypes from 'prop-types';
 import styles from './PersonState.module.css';
-
 const PersonState = ({peopleInfo, PersonName}) => {
     return (
         <>
-          <ul className={styles.people__info}>
-            {peopleInfo.map(({title,info}) => (
-              info&&(
-                <li key={info}>
-                  
-                  <span>{title}: {info}</span>
-                  
-                </li>
-                )))}
-          </ul>
+          <div className={styles.wrapper}>
+            <ul className={styles.info__container}>
+              {peopleInfo.map(({title,info}) => (
+                info&&(
+                  <li className={styles.info__item} key={info}>
+                    
+                    <span className={styles.info__title}>{title} </span> :{info}
+                    
+                  </li>
+                  )))}
+            </ul>
+          </div>
         </>
       );
     }

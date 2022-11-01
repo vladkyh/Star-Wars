@@ -31,6 +31,13 @@ export const getApiResourse = async (url) => {
             return false;
         }
     }
+
+    export const makeConcurrentRequest = async (url) =>{
+        const res = await Promise.all(url.map(res=>{
+            return fetch(res).then(res => res.json())
+        }));
+        return res;
+    }
         
         // тоже самое (промис), но без асинхрона
         // fetch(url)
