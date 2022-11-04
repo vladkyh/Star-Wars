@@ -5,18 +5,16 @@ import styles from './PersonImg.module.css';
 import iconFavoriteActive from '@static/favorite-icon-active.svg'
 import iconFavorite from '@static/favorite-icon.svg'
 const PersonImg = ({
-  personImg,
-  peopleId,
-  PersonName,
-  personFavorite,
-  setPersonFavorite
+       personImg,
+       peopleId,
+       PersonName,
+       personFavorite,
+       setPersonFavorite
   
   }) => {
       
     const dispath = useDispatch();
   
-    
-
     const dispatchFavoritePeople = () =>{
       if (personFavorite) {
         
@@ -44,14 +42,7 @@ const PersonImg = ({
                   src={personFavorite ? iconFavoriteActive : iconFavorite}
                   alt={personFavorite ?'Удалить из избранного' :'Добавить в избранное'}
                />
-              </div>
-
-              
-
-              
-              
-              
-              
+              </div>  
       </>
     );
 }

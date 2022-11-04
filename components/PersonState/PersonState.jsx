@@ -7,7 +7,7 @@ const PersonState = ({peopleInfo, PersonName}) => {
             <ul className={styles.info__container}>
               {peopleInfo.map(({title,info}) => (
                 info&&(
-                  <li className={styles.info__item} key={info}>
+                  <li className={styles.info__item} key={title}>
                     
                     <span className={styles.info__title}>{title} </span> :{info}
                     

@@ -5,14 +5,15 @@ import { getApiResourse } from '@utils/network';
 import styles from './PersonPage.module.css';
 import { API_PERSON } from '@const/api';
 import { withErrorApi } from '@hoc-components/withErrorApi';
-import { getPeopleImage, getPeoplePageId } from '../../services/getPeopleData';
+import { getPeopleImage, getPeoplePageId } from '@services/getPeopleData';
 import PersonImg from '@components/PersonImg/PersonImg';
 import PersonState from '@components/PersonState/PersonState';
 import { lazy } from 'react';
 import { Suspense } from 'react';
-import UiLoading from '../../components/ui-kit/UiLoading/UiLoading';
+import UiLoading from '@components/ui-kit/UiLoading/UiLoading';
 import {useSelector} from 'react-redux';
 import FavoritePage from '../FavoritePage/FavoritePage';
+
 
 const PersonPage = ({match, setErrorApi}) => { 
     const [peopleId, setPeopleId] = useState(null)
@@ -35,27 +36,28 @@ const PersonPage = ({match, setErrorApi}) => {
     const navigate = useNavigate();
     const GoBack = () => navigate(-1);
 
-
+// подгружаем данные
     useEffect(() => {
 
       (async() => {
-        const res = await getApiResourse(`${API_PERSON}/${id}/`);
-        setPersonImg(getPeopleImage(id));
-        setPeopleId(id); 
-        storeData[id] ? setPersonFavorite(true) :setPersonFavorite(false);
-        setPeopleInfo([
-              {title: 'Height',   info: res.height},
-              {title: 'Mass',  info: res.mass},
-              {title: 'Hait color',  info: res.hair_color},
-              {title: 'Skin color',  info: res.skin_color},
-              {title: 'Eye color',  info: res.eye_color},
-              {title: 'Gender',  info: res.gender}
-        ]);
-        res.films.length && setPersonFilms(res.films);
-        setPersonName(res.name);
-        setErrorApi(!res);
-          
         
+        const res = await getApiResourse(`${API_PERSON}/${id}/`);
+         if(res){
+          setPersonImg(getPeopleImage(id));
+          setPeopleId(id); 
+          storeData[id] ? setPersonFavorite(true) :setPersonFavorite(false);
+          res.films.length && setPersonFilms(res.films);
+          setPersonName(res.name);
+          setPeopleInfo([
+            {title: 'Height',   info: res.height},
+            {title: 'Mass',  info: res.mass},
+            {title: 'Hait color',  info: res.hair_color},
+            {title: 'Skin color',  info: res.skin_color},
+            {title: 'Eye color',  info: res.eye_color},
+            {title: 'Gender',  info: res.gender}
+          ]);
+         }
+         setErrorApi(!res);
       })(id);
 
     //   самовызывающаяся функция
@@ -66,7 +68,6 @@ const PersonPage = ({match, setErrorApi}) => {
     
     
   return (
-    
     <>  
     {/* кнопка назад */}
       <a onClick={GoBack} className={styles.back}>
@@ -74,11 +75,11 @@ const PersonPage = ({match, setErrorApi}) => {
         <span className={styles.back__button} >Go back</span>
       </a>
 
-
+    {/* main */}
     <div className={styles.wrapper}>
             
             <span  className={styles.person__name}>{PersonName}</span >
-                        {/* вот эта хуйня с && это оказывается ебучий тернарный оператор, типа если peopleindfo: true, то передаем пропсы */}
+            {/* вот эта хуйня с && это оказывается ебучий тернарный оператор, типа если peopleindfo: true, то передаем пропсы */}
            <div className={styles.container}>
 
               <PersonImg 
@@ -108,4 +109,4 @@ const PersonPage = ({match, setErrorApi}) => {
 // PersonPage.propTypes = {
 //   text: PropTypes.func
 // }
-export default PersonPage;
+export default withErrorApi(PersonPage) ;
